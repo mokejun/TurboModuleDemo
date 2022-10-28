@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
         marginRight: 35,
         marginTop: 20,
         marginBottom: 25,
-        width: 120,
+        width: 250,
     },
     buttonTextStyle: {
         color: "#FFFFFF",
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     },
     inputStyle: {
         height: 40,
-        width: 120,
+        width: 250,
         color: "black",
         paddingLeft: 15,
         paddingRight: 15,
