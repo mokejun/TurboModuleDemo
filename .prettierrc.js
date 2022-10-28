@@ -1,19 +1,20 @@
 module.exports = {
-    arrowParens: 'avoid',
-    bracketSameLine: true,
-    bracketSpacing: false,
-    singleQuote: true,
-    trailingComma: 'es5',
-    tabWidth: 4,
-    semi: true,
-    printWidth: 300,
-    endOfLine: 'atuo',
-    overrides: [
-        {
-            files: ['*.ts', '*.tsx', '*.js'],
-            options: {
-                tabWidth: 4,
-            },
-        },
-    ],
+
+        "tabWidth": 4,
+        "printWidth": 300,
+        "trailingComma": "es5",
+        "bracketSpacing": false,
+        "arrowParens": "avoid",
+        "endOfLine": "auto",
+        "overrides": [
+          {
+            "files": ["*.ts", "*.tsx", "*.js"],
+            "options": {
+              "tabWidth": 4
+            }
+          }
+        ]
+
+      
+            
 };
