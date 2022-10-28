@@ -3,7 +3,6 @@ import {View, Text, TextInput, Button, ToastAndroid, Keyboard, StyleSheet, Dimen
 import RTNCalculator from "rtn-calculator/js/NativeCalculator";
 
 const Login = ({navigation}) => {
-    // const [formData, setFormData] = React.useState(formDefaultData);
     const [userName, setUserName] = useState("");
     const [userPwd, setUserPwd] = useState("");
 
