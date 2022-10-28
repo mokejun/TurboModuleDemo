@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {View, Text, TextInput, Button, ToastAndroid, Keyboard, StyleSheet, Dimensions, Touchable, TouchableOpacity, TouchableHighlight} from "react-native";
 import RTNCalculator from "rtn-calculator/js/NativeCalculator";
+import RTNHelloWorld from "rtn-helloworld/js/NativeHelloWorld";
 
 const Login = ({navigation}) => {
     const [userName, setUserName] = useState("");
@@ -19,7 +20,11 @@ const Login = ({navigation}) => {
         navigation.push("TaskList");
     };
 
-    const handleTurboModule = () => {
+    const handleTurboModuleOne = () => {
+        console.log(`print-->${RTNHelloWorld?.print("hello world!!!")}`);
+    };
+
+    const handleTurboModuleTwo = () => {
         const value = RTNCalculator?.add(3, 7);
         if (value) {
             ToastAndroid.show(`3+7 的结果是${value}`, 300);
@@ -58,8 +63,11 @@ const Login = ({navigation}) => {
             <TouchableHighlight style={styles.buttonStyle} onPress={handleSubmitPress}>
                 <Text style={styles.buttonTextStyle}>登陆</Text>
             </TouchableHighlight>
-            <TouchableHighlight style={styles.buttonStyle} onPress={handleTurboModule}>
-                <Text style={styles.buttonTextStyle}>测试 turbo module</Text>
+            <TouchableHighlight style={styles.buttonStyle} onPress={handleTurboModuleOne}>
+                <Text style={styles.buttonTextStyle}>测试 turbo module1</Text>
+            </TouchableHighlight>
+            <TouchableHighlight style={styles.buttonStyle} onPress={handleTurboModuleTwo}>
+                <Text style={styles.buttonTextStyle}>测试 turbo module2</Text>
             </TouchableHighlight>
         </View>
     );
