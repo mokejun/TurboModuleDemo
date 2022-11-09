@@ -1,34 +1,39 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {View, Text, TextInput, Button, ToastAndroid, Keyboard, StyleSheet, Dimensions, Touchable, TouchableOpacity, TouchableHighlight} from "react-native";
-import RTNCalculator from "rtn-calculator/js/NativeCalculator";
-import RTNHelloWorld from "rtn-helloworld/js/NativeHelloWorld";
+import {useDispatch, useStore, connect, useSelector} from "react-redux";
+import {RootState} from "../config/RootState";
+import {useAction, useUnaryAction, useBinaryAction, useObjectKeyAction, useLoadingStatus, showLoading, loadingAction} from "../core-native-project/src";
+import {loginActions} from "../module/LoginView";
 
-const Login = ({navigation}) => {
+const Login = (props: any) => {
+    const {navigation} = props;
     const [userName, setUserName] = useState("");
     const [userPwd, setUserPwd] = useState("");
 
+    const action = useAction(loginActions.goLogin, navigation, userName, userPwd);
+    const handlerUseUnaryAction = useUnaryAction(loginActions.handleTurboModuleOne, 100, "");
+    const handlerUseBinaryAction = useBinaryAction(loginActions.handleTurboModuleTwo, 100);
+    const handlerUseObjectKeyAction = useObjectKeyAction(loginActions.handleTurboModuleThree, "key");
+    const isShowLoading = useLoadingStatus("login");
+
     const handleSubmitPress = () => {
-        console.log("handleSubmitPress");
-        if (!userName) {
-            ToastAndroid.show("请输入用户名", 100);
-            return;
-        }
-        if (!userPwd) {
-            ToastAndroid.show("请输入密码", 100);
-            return;
-        }
-        navigation.push("TaskList");
+        action();
     };
 
     const handleTurboModuleOne = () => {
-        console.log(`print-->${RTNHelloWorld?.print("hello world!!!")}`);
+        if (!isShowLoading) {
+            handlerUseUnaryAction(false);
+        } else {
+            ToastAndroid.show("已经loading", 500);
+        }
     };
 
     const handleTurboModuleTwo = () => {
-        const value = RTNCalculator?.add(3, 7);
-        if (value) {
-            ToastAndroid.show(`3+7 的结果是${value}`, 300);
-        }
+        handlerUseBinaryAction("99", true);
+    };
+
+    const handleTurboModuleThree = () => {
+        handlerUseObjectKeyAction(99);
     };
 
     return (
@@ -68,6 +73,9 @@ const Login = ({navigation}) => {
             </TouchableHighlight>
             <TouchableHighlight style={styles.buttonStyle} onPress={handleTurboModuleTwo}>
                 <Text style={styles.buttonTextStyle}>测试 turbo module2</Text>
+            </TouchableHighlight>
+            <TouchableHighlight style={styles.buttonStyle} onPress={handleTurboModuleThree}>
+                <Text style={styles.buttonTextStyle}>测试 turbo module3</Text>
             </TouchableHighlight>
         </View>
     );

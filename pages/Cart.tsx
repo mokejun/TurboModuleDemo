@@ -4,18 +4,16 @@ import {toJS} from "mobx";
 import {useDispatch, useStore, connect, useSelector} from "react-redux";
 import {taskListActions} from "../module/TaskListView";
 import {RootState} from "../config/RootState";
+import {cartActions} from "../module/CartView";
 
-const TaskList = (props: any) => {
+const Cart = (props: any) => {
     const {navigation} = props;
     const dispatch = useDispatch();
-    const serverData = useSelector((state: RootState) => state.app.taskList.list);
+    const serverData = useSelector((state: RootState) => state.app.cart.list);
 
     const handleItemClick = (item: any, isAdd: boolean) => {
+        dispatch(cartActions.goDetail(navigation, item, isAdd));
         dispatch(taskListActions.goDetail(navigation, item, isAdd));
-    };
-
-    const goCart = () => {
-        dispatch(taskListActions.goCart(navigation));
     };
 
     const _renderItem = ({item, index}: {item: any; index: number}) => {
@@ -49,16 +47,13 @@ const TaskList = (props: any) => {
 
     return (
         <View style={styles.mainBody}>
-            <Text>项目列表</Text>
+            <Text>购物车</Text>
             <FlatList keyExtractor={_keyExtractor} data={toJS(serverData)} renderItem={_renderItem} />
-            <TouchableHighlight style={styles.buttonStyle} onPress={goCart}>
-                <Text style={styles.buttonTextStyle}>去购物车</Text>
-            </TouchableHighlight>
         </View>
     );
 };
 
-export default TaskList;
+export default Cart;
 
 const styles = StyleSheet.create({
     mainBody: {

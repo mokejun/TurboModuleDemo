@@ -1,19 +1,16 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {View, Text, StyleSheet} from "react-native";
+import {connect, useSelector} from "react-redux";
+import {RootState} from "../config/RootState";
 
-const TaskDetail = ({route, navigation}) => {
-    const {item} = route.params;
-
-    const [taskDetailData, setTaskDetailData] = useState({});
-
-    useEffect(() => {
-        setTaskDetailData(item);
-    }, []);
+const TaskDetail = (props: any) => {
+    const {dispatch, navigation} = props;
+    const detail = useSelector((state: RootState) => state.app.taskDetail.detail);
 
     return (
         <View style={styles.mainBody}>
             <Text>项目列表详情</Text>
-            <Text>{`name-->${taskDetailData.name}`}</Text>
+            <Text>{`name-->${detail?.name}`}</Text>
         </View>
     );
 };
